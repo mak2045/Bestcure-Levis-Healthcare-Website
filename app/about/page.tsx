@@ -3,9 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading";
 import CTASection from "@/components/CTASection";
-import CertificateCard from "@/components/CertificateCard";
 import { directors } from "@/data/directors";
-import { certificates } from "@/data/certificates";
 import { site } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -46,10 +44,13 @@ export default function AboutPage() {
             />
             <div className="reveal mt-8">
               <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-leaf-600">Our Focus</h3>
-              <ul className="mt-4 divide-y divide-forest-900/10 border-y border-forest-900/10">
+              <ul className="mt-4 grid gap-2.5">
                 {focusPoints.map((point) => (
-                  <li key={point} className="flex items-center gap-3 py-3 text-[15px] text-forest-950">
-                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lime-400/25">
+                  <li
+                    key={point}
+                    className="flex items-start gap-2.5 rounded-xl bg-cream-50 px-3.5 py-2.5 text-[14.5px] leading-6 text-forest-950"
+                  >
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-lime-400/30">
                       <svg viewBox="0 0 24 24" className="h-3 w-3 text-forest-800" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                         <path d="M20 6L9 17l-5-5" />
                       </svg>
@@ -60,7 +61,7 @@ export default function AboutPage() {
               </ul>
             </div>
           </div>
-          <div className="reveal relative aspect-[4/3] overflow-hidden rounded-sm">
+          <div className="reveal relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[var(--shadow-lift)]">
             <Image
               src="/dpr/about-farmer.jpg"
               alt="Farmer tending to cattle in a livestock shed"
@@ -81,7 +82,7 @@ export default function AboutPage() {
             {directors.map((d) => (
               <article
                 key={d.name}
-                className="reveal flex flex-col rounded-sm border border-forest-900/10 bg-cream-50 p-7"
+                className="reveal flex flex-col rounded-2xl border border-forest-900/10 bg-cream-50 p-7 shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1 hover:border-leaf-500/30 hover:shadow-[var(--shadow-lift)]"
               >
                 <span className="inline-flex w-fit rounded-full bg-forest-800/8 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-forest-800">
                   {d.role}
@@ -131,7 +132,7 @@ export default function AboutPage() {
             intro="Whether you need product information, dealership enquiries or technical guidance, our team is ready to help."
           />
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            <div className="rounded-sm border border-forest-900/10 bg-white p-6">
+            <div className="min-w-0 rounded-2xl border border-forest-900/10 bg-white p-6 shadow-[var(--shadow-soft)]">
               <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-leaf-600">Contact Numbers</h3>
               <ul className="mt-4 space-y-3 text-[15px] text-stone-warm">
                 <li className="flex items-center gap-3">
@@ -160,7 +161,10 @@ export default function AboutPage() {
                       <path d="M20 6L9 17l-5-5" />
                     </svg>
                   </span>
-                  <a href={site.emailHref} className="font-semibold text-forest-950 hover:text-forest-700">
+                  <a
+                    href={site.emailHref}
+                    className="font-semibold text-forest-950 [overflow-wrap:anywhere] hover:text-forest-700"
+                  >
                     {site.email}
                   </a>
                 </li>
@@ -174,7 +178,7 @@ export default function AboutPage() {
                 </li>
               </ul>
             </div>
-            <div className="rounded-sm border border-forest-900/10 bg-white p-6">
+            <div className="min-w-0 rounded-2xl border border-forest-900/10 bg-white p-6 shadow-[var(--shadow-soft)]">
               <h3 className="text-xs font-semibold uppercase tracking-[0.22em] text-leaf-600">Quick Links</h3>
               <ul className="mt-4 space-y-2.5">
                 <li><Link href="/" className="text-forest-950 hover:text-forest-700">Home</Link></li>
@@ -187,7 +191,7 @@ export default function AboutPage() {
           <div className="reveal mt-8 text-center">
             <Link
               href="/contact"
-              className="inline-block rounded-sm bg-forest-800 px-7 py-3 text-base font-semibold text-cream-50 transition-colors hover:bg-forest-900"
+              className="inline-block rounded-full bg-forest-800 px-7 py-3.5 text-[15px] font-semibold text-cream-50 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-forest-900"
             >
               Send Enquiry
             </Link>

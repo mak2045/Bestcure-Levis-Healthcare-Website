@@ -15,7 +15,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   return (
     <>
       {/* ---------------- Breadcrumb ---------------- */}
-      <nav aria-label="Breadcrumb" className="border-b border-forest-900/10 bg-cream-100/60">
+      <nav aria-label="Breadcrumb" className="border-b border-forest-900/10 bg-cream-100/70">
         <ol className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 text-sm sm:px-6 lg:px-8">
           <li>
             <Link href="/" className="text-stone-warm transition-colors hover:text-forest-800">
@@ -40,7 +40,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
             {/* Product image — contained, centered, consistent height */}
-            <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-sm bg-cream-100 p-6">
+            <div className="relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-b from-cream-100 to-cream-50 p-6 shadow-[var(--shadow-lift)] sm:p-10">
               <Image
                 src={product.image}
                 alt={product.alt}
@@ -53,24 +53,26 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* Product information */}
             <div className="flex flex-col justify-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-lime-400">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-lime-400">
                 {product.productType || "Animal Nutrition Product"}
               </p>
-              <h1 className="mt-3 font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl">
+              <h1 className="mt-3.5 font-display text-[1.9rem] font-semibold leading-[1.15] text-white sm:text-4xl">
                 {product.name}
               </h1>
-              <p className="mt-4 text-base leading-7 text-cream-100/80">{product.description}</p>
+              <p className="mt-4 text-[15px] leading-7 text-cream-100/80 sm:text-base sm:leading-8">
+                {product.description}
+              </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href={`/contact?product=${encodeURIComponent(product.slug)}`}
-                  className="rounded-sm bg-lime-500 px-7 py-3.5 text-center text-base font-semibold text-forest-950 transition-colors hover:bg-lime-400"
+                  className="rounded-full bg-lime-500 px-7 py-3.5 text-center text-[15px] font-semibold text-forest-950 shadow-[var(--shadow-lift)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-lime-400"
                 >
                   Enquire About This Product
                 </Link>
                 <a
                   href={site.phoneHref}
-                  className="rounded-sm border border-white/25 px-7 py-3.5 text-center text-base font-semibold text-white transition-colors hover:bg-white/10"
+                  className="rounded-full border border-white/25 px-7 py-3.5 text-center text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-white/10"
                 >
                   Call {site.phoneDisplay}
                 </a>
@@ -83,8 +85,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       {/* ---------------- Product information ---------------- */}
       <section className="bg-cream-50">
         <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-          <div className="rounded-sm border border-forest-900/10 bg-white p-6 sm:p-8">
-            <h2 className="font-display text-2xl font-semibold tracking-tight text-forest-950">
+          <div className="rounded-2xl border border-forest-900/10 bg-white p-6 shadow-[var(--shadow-soft)] sm:p-8">
+            <h2 className="font-display text-[1.4rem] font-semibold text-forest-950">
               Product Information
             </h2>
             <div className="mt-5 grid gap-6 sm:grid-cols-2">
@@ -124,7 +126,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
           <div className="reveal flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div className="max-w-xl">
-              <h2 className="font-display text-3xl font-semibold leading-tight tracking-tight text-white">
+              <h2 className="font-display text-[1.75rem] font-semibold leading-tight text-white sm:text-3xl">
                 Interested in this product?
               </h2>
               <p className="mt-3 text-base leading-7 text-cream-100/75">
@@ -133,7 +135,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </div>
             <Link
               href={`/contact?product=${encodeURIComponent(product.slug)}`}
-              className="shrink-0 rounded-sm bg-lime-500 px-7 py-3.5 text-center text-base font-semibold text-forest-950 transition-colors hover:bg-lime-400"
+              className="shrink-0 rounded-full bg-lime-500 px-7 py-3.5 text-center text-[15px] font-semibold text-forest-950 shadow-[var(--shadow-lift)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-lime-400"
             >
               Enquire Now
             </Link>
@@ -144,7 +146,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       {/* ---------------- Related products ---------------- */}
       <section className="border-t border-forest-900/10 bg-cream-100/60">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-          <h2 className="font-display text-2xl font-semibold tracking-tight text-forest-950">
+          <h2 className="font-display text-[1.4rem] font-semibold text-forest-950">
             Other Products
           </h2>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

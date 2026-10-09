@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand palette — forest / agricultural green, lime, warm neutrals */
-  --color-forest-950: #0b2b1d;
-  --color-forest-900: #0f3a27;
+  /* ---------------------------------------------------------------
+   * Brand palette — forest / agricultural green, lime accent,
+   * warm off-white neutrals. Names kept stable so existing
+   * utility classes (bg-forest-950, text-lime-400, …) stay valid.
+   * ------------------------------------------------------------- */
+  --color-forest-950: #082218;
+  --color-forest-900: #0d3423;
   --color-forest-800: #14532d;
   --color-forest-700: #1a6b3a;
   --color-forest-600: #22803f;
   --color-leaf-500: #4d9b3d;
   --color-leaf-600: #3f8432;
-  --color-lime-400: #a3c93a;
+  --color-lime-400: #a8cf3f;
   --color-lime-500: #8fbf2a;
   --color-lime-600: #76a41f;
   --color-cream-50: #faf8f2;
@@ -17,19 +21,46 @@
   --color-cream-200: #e9e3d3;
   --color-stone-warm: #6b6a62;
 
-  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  /* Poppins across the board; display/sans kept as separate hooks so
+     existing `font-display` / `font-sans` classes continue to work. */
+  --font-display: var(--font-poppins), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-poppins), "Segoe UI", system-ui, sans-serif;
+
+  /* Premium shape + depth tokens */
+  --radius-card: 1rem;
+  --radius-pill: 999px;
+
+  --shadow-soft: 0 1px 2px rgba(8, 34, 24, 0.04), 0 8px 24px -12px rgba(8, 34, 24, 0.18);
+  --shadow-lift: 0 2px 6px rgba(8, 34, 24, 0.06), 0 24px 48px -20px rgba(8, 34, 24, 0.32);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background-color: var(--color-cream-50);
   color: #23231f;
   font-family: var(--font-sans);
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 ::selection {
@@ -37,31 +68,76 @@ body {
   color: var(--color-forest-950);
 }
 
-/* ---------- Lightweight CSS-only entry animation ----------
- * Pure CSS — no JavaScript observer required. Content is visible by
- * default and animates in on every mount (including client-side
- * navigation). Works with or without hydration.
- */
-.reveal {
-  animation: reveal-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes reveal-in {
+/* ------------------------------------------------------------------
+ * Motion — CSS only. Content is visible by default and animates in on
+ * every mount, so it works with or without hydration and never leaves
+ * content hidden if JavaScript fails.
+ * ---------------------------------------------------------------- */
+@keyframes reveal-up {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translate3d(0, 18px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slow-zoom {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.reveal {
+  animation: reveal-up 0.7s var(--ease-out-soft) both;
+}
+
+.reveal-fade {
+  animation: reveal-fade 0.9s ease-out both;
+}
+
+/* Hero photograph gets a very slow settle-in; subtle and non-distracting. */
+.hero-media {
+  animation: slow-zoom 1.6s var(--ease-out-soft) both;
+}
+
+/* Stagger helper — set --d on children. */
+.stagger > * {
+  animation: reveal-up 0.7s var(--ease-out-soft) both;
+  animation-delay: calc(var(--d, 0) * 90ms);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .reveal {
-    animation: none;
+  .reveal,
+  .reveal-fade,
+  .hero-media,
+  .stagger > * {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

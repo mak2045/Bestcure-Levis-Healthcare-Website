@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { productOptions, generalEnquiryLabel, findCategoryByValue } from "@/data/products";
 import { submitEnquiry, type EnquiryData } from "@/lib/enquiry";
@@ -13,7 +13,7 @@ interface EnquiryFormProps {
 }
 
 const fieldClass =
-  "w-full rounded-sm border border-forest-900/20 bg-white px-3.5 py-2.5 text-[15px] text-forest-950 placeholder:text-stone-warm/60 focus:border-forest-700 focus:outline-none focus:ring-2 focus:ring-forest-700/20";
+  "w-full rounded-xl border border-forest-900/15 bg-white px-4 py-3 text-[15px] text-forest-950 shadow-[inset_0_1px_2px_rgba(8,34,24,0.04)] transition-colors placeholder:text-stone-warm/60 focus:border-forest-700 focus:outline-none focus:ring-2 focus:ring-forest-700/20";
 
 export default function EnquiryForm({ initialProduct }: EnquiryFormProps) {
   const searchParams = useSearchParams();
@@ -33,14 +33,13 @@ export default function EnquiryForm({ initialProduct }: EnquiryFormProps) {
     business: "",
     message: "",
   });
-  const [product, setProduct] = useState(initialProduct);
-
-  // Keep the select in sync if the query parameter changes (client-side nav).
-  // preselected reflects the current ?product= param; fall back to the
-  // server-provided initialProduct so the select is never left blank.
-  useEffect(() => {
-    setProduct(preselected);
-  }, [preselected]);
+  // The customer's explicit selection, scoped to the ?product= value it was
+  // made against. When the query parameter changes (client-side navigation),
+  // the stale choice stops matching and `preselected` takes over again — so
+  // the select is never left blank and no sync effect is required.
+  const [choice, setChoice] = useState<{ value: string; for: string } | null>(null);
+  const product = choice && choice.for === preselected ? choice.value : preselected;
+  const setProduct = (value: string) => setChoice({ value, for: preselected });
 
   function update<K extends keyof Omit<EnquiryData, "product">>(
     key: K,
@@ -73,15 +72,15 @@ export default function EnquiryForm({ initialProduct }: EnquiryFormProps) {
   if (status === "success") {
     return (
       <div
-        className="rounded-sm border border-leaf-500/30 bg-white p-8 text-center shadow-sm"
+        className="rounded-2xl border border-leaf-500/30 bg-white p-8 text-center shadow-[var(--shadow-soft)]"
         role="status"
       >
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-leaf-500/15">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-leaf-500/15">
           <svg viewBox="0 0 24 24" className="h-6 w-6 text-leaf-600" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M20 6L9 17l-5-5" />
           </svg>
         </div>
-        <h3 className="mt-5 font-display text-2xl font-semibold text-forest-950">
+        <h3 className="mt-5 font-display text-[1.4rem] font-semibold text-forest-950">
           Thank you. Your enquiry has been received.
         </h3>
         <p className="mx-auto mt-3 max-w-md text-[15px] leading-7 text-stone-warm">
@@ -110,7 +109,7 @@ export default function EnquiryForm({ initialProduct }: EnquiryFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
       {product !== generalEnquiryLabel ? (
-        <div className="rounded-sm border border-lime-500/40 bg-lime-400/10 px-4 py-3 text-sm text-forest-900">
+        <div className="rounded-xl border border-lime-500/40 bg-lime-400/10 px-4 py-3 text-sm text-forest-900">
           Enquiring about: <strong className="font-semibold">{product}</strong>
         </div>
       ) : null}
@@ -220,7 +219,7 @@ export default function EnquiryForm({ initialProduct }: EnquiryFormProps) {
       </div>
 
       {error ? (
-        <p className="rounded-sm border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
+        <p className="rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
           {error}
         </p>
       ) : null}
@@ -229,7 +228,7 @@ export default function EnquiryForm({ initialProduct }: EnquiryFormProps) {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="rounded-sm bg-forest-800 px-7 py-3 text-base font-semibold text-cream-50 transition-colors hover:bg-forest-900 disabled:cursor-not-allowed disabled:opacity-60"
+          className="rounded-full bg-forest-800 px-7 py-3.5 text-[15px] font-semibold text-cream-50 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-forest-900 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
         >
           {status === "submitting" ? "Submitting…" : "Submit Enquiry"}
         </button>

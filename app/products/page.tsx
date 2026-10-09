@@ -18,8 +18,12 @@ export default function ProductsPage() {
   return (
     <>
       {/* ---------------- Page hero ---------------- */}
-      <section className="border-b border-forest-900/10 bg-forest-950">
-        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
+      <section className="relative isolate overflow-hidden border-b border-forest-900/10 bg-forest-950">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(110%_120%_at_85%_0%,rgba(168,207,63,0.16),transparent_60%)]"
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
           <SectionHeading
             dark
             eyebrow="Product Portfolio"
@@ -32,9 +36,11 @@ export default function ProductsPage() {
       {/* ---------------- Product grid ---------------- */}
       <section className="bg-cream-50">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {productCategories.map((category) => (
-              <ProductCard key={category.slug} category={category} />
+          <div className="stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {productCategories.map((category, i) => (
+              <div key={category.slug} style={{ ["--d" as string]: i }}>
+                <ProductCard category={category} />
+              </div>
             ))}
           </div>
         </div>
@@ -48,9 +54,11 @@ export default function ProductsPage() {
             title="Certifications & Registrations"
             intro="Bestcure Levis Healthcare Private Limited operates with certified quality systems and government registrations, demonstrating commitment to compliance and customer trust."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {certificates.map((certificate) => (
-              <CertificateCard key={certificate.id} certificate={certificate} />
+          <div className="stagger mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {certificates.map((certificate, i) => (
+              <div key={certificate.id} style={{ ["--d" as string]: i % 3 }}>
+                <CertificateCard certificate={certificate} />
+              </div>
             ))}
           </div>
         </div>
@@ -60,7 +68,7 @@ export default function ProductsPage() {
       <section id="product-enquiry-help" className="scroll-mt-24 border-t border-forest-900/10 bg-cream-100/70">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="reveal mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-3xl font-semibold tracking-tight text-forest-950">
+            <h2 className="font-display text-[1.75rem] font-semibold text-forest-950 sm:text-3xl">
               Can&rsquo;t find what you&rsquo;re looking for?
             </h2>
             <p className="mt-3 text-base leading-7 text-stone-warm">
@@ -68,7 +76,7 @@ export default function ProductsPage() {
             </p>
             <Link
               href="/contact"
-              className="mt-7 inline-block rounded-sm bg-forest-800 px-7 py-3.5 text-base font-semibold text-cream-50 transition-colors hover:bg-forest-900"
+              className="mt-7 inline-block rounded-full bg-forest-800 px-7 py-3.5 text-[15px] font-semibold text-cream-50 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-forest-900"
             >
               Send Product Enquiry
             </Link>
