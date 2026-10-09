@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette — forest / agricultural green, lime, warm neutrals */
+  --color-forest-950: #0b2b1d;
+  --color-forest-900: #0f3a27;
+  --color-forest-800: #14532d;
+  --color-forest-700: #1a6b3a;
+  --color-forest-600: #22803f;
+  --color-leaf-500: #4d9b3d;
+  --color-leaf-600: #3f8432;
+  --color-lime-400: #a3c93a;
+  --color-lime-500: #8fbf2a;
+  --color-lime-600: #76a41f;
+  --color-cream-50: #faf8f2;
+  --color-cream-100: #f4f0e6;
+  --color-cream-200: #e9e3d3;
+  --color-stone-warm: #6b6a62;
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream-50);
+  color: #23231f;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-lime-400);
+  color: var(--color-forest-950);
+}
+
+/* ---------- Lightweight CSS-only entry animation ----------
+ * Pure CSS — no JavaScript observer required. Content is visible by
+ * default and animates in on every mount (including client-side
+ * navigation). Works with or without hydration.
+ */
+.reveal {
+  animation: reveal-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    animation: none;
+  }
+}

@@ -1,0 +1,66 @@
+export interface ProductDetailItem {
+  label: string;
+  value: string;
+}
+
+export interface ProductCategory {
+  slug: string;
+  name: string;
+  description: string;
+  image: string;
+  alt: string;
+  productType?: string;
+  details?: ProductDetailItem[];
+}
+
+export const productCategories: ProductCategory[] = [
+  {
+    slug: "gao-swad",
+    name: "गौ-स्वाद पशु आहार",
+    description: "प्रीमियम पशु आहार — पौष्टिक एवं भरोसेमंद पशु आहार।",
+    image: "/products/gao-swad.png",
+    alt: "गौ-स्वाद पशु आहार पैकेजिंग",
+    productType: "पशु आहार",
+  },
+  {
+    slug: "doodh-shakti",
+    name: "Doodh Shakti 10000 Super Mix Gold",
+    description: "दुध शक्ति खिलाओ पशु स्वस्थ व अधिक दुध पाओ। बैलेंस्ड ग्रेन्स एवं विटामिन्स के साथ।",
+    image: "/products/doodh-shakti.png",
+    alt: "Doodh Shakti 10000 Super Mix Gold पशु आहार पैकेजिंग",
+    productType: "पशु आहार",
+  },
+  {
+    slug: "dhana-dhan",
+    name: "ढना-ढन Organic Feed & Fat Booster",
+    description: "पशुओं की सम्पूर्ण सुरक्षा आयुर्वेद का आधार। ऑर्गेनिक फ़ीड एवं फैट बूस्टर।",
+    image: "/products/dhana-dhan.png",
+    alt: "ढना-ढन Organic Feed & Fat Booster पैकेजिंग",
+    productType: "ऑर्गेनिक फ़ीड सप्लीमेंट",
+  },
+];
+
+export const generalEnquiryLabel = "General Enquiry";
+
+export const productOptions: string[] = [
+  ...productCategories.map((c) => c.name),
+  generalEnquiryLabel,
+];
+
+export function findCategoryByName(name: string): ProductCategory | undefined {
+  const normalised = name.trim().toLowerCase();
+  return productCategories.find((c) => c.name.toLowerCase() === normalised);
+}
+
+// Find a category by slug (used for /products/[slug] routes and ?product=slug preselection).
+export function findCategoryBySlug(slug: string): ProductCategory | undefined {
+  return productCategories.find((c) => c.slug === slug);
+}
+
+// Find a category by name or slug (used for ?product= preselection via enquiry form).
+export function findCategoryByValue(value: string): ProductCategory | undefined {
+  const normalised = value.trim().toLowerCase();
+  return productCategories.find(
+    (c) => c.name.toLowerCase() === normalised || c.slug.toLowerCase() === normalised,
+  );
+}
