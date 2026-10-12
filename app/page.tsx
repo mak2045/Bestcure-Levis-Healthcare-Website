@@ -86,6 +86,24 @@ export default function HomePage() {
           aria-hidden="true"
         />
 
+        {/* Promotional lead banner — keeps the original hero photograph in place
+            and only layers the supplied feed-pellets ad on top, as originally attached. */}
+        <div
+          className="absolute bottom-16 left-4 right-4 max-w-3xl mx-auto"
+          aria-label="Promotional banner: cattle and buffalo feed pellets"
+        >
+          <Image
+            src="/ads/feed-pellets-ad.png"
+            alt="स्वस्थ पशु समृद्ध किसान — उत्तम गुणवत्ता पशु आहार पैलेट, Cattle & Buffalo Feed Pellets"
+            width={1536}
+            height={1024}
+            className="w-full h-auto"
+            priority
+            sizes="(min-width: 1024px) 75vw, 100vw"
+            style={{ objectFit: "contain" }}
+          />
+        </div>
+
         <div className="relative mx-auto flex min-h-[86vh] max-w-7xl flex-col justify-center px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
           <p className="reveal text-[11px] font-semibold uppercase tracking-[0.3em] text-lime-400">
             Agri-Animal Nutrition Company · India
