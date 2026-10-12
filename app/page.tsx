@@ -12,32 +12,32 @@ import { site } from "@/data/site";
 
 /** Genuine portfolio categories named in the company description. */
 const categories = [
-  { name: "Cattle Feed", image: "/dpr/cattle-feed.jpg", alt: "Cattle feeding on fodder" },
+  { name: "Cattle Feed", image: "/dpr/cattle-feed.jpg", alt: "Cow eating fresh green fodder on a farm" },
   {
     name: "Mineral Mixtures",
     image: "/dpr/mineral-mixtures.jpg",
-    alt: "Mineral mixture nutrition for livestock",
+    alt: "Cows grazing on a lush green pasture",
   },
   {
     name: "Organic Feed Supplements",
     image: "/dpr/organic-supplements.jpg",
-    alt: "Organic feed supplements for dairy animals",
+    alt: "Buffalo grazing on a green pasture",
   },
   {
     name: "Feed Additives",
     image: "/dpr/feed-additives.jpg",
-    alt: "Feed additives for livestock nutrition",
+    alt: "Calf eating fresh green leaves on a farm",
   },
   {
     name: "Calcium Supplements",
     image: "/dpr/calcium-supplements.jpg",
-    alt: "Calcium supplements for cattle",
+    alt: "White cow eating green grass",
   },
-  { name: "Mineral Blocks", image: "/dpr/mineral-blocks.jpg", alt: "Mineral licks for livestock" },
+  { name: "Mineral Blocks", image: "/dpr/mineral-blocks.jpg", alt: "Buffalo eating grass in a green meadow" },
   {
     name: "Specialized Nutrition",
     image: "/dpr/specialized-nutrition.jpg",
-    alt: "Specialised livestock nutrition solutions",
+    alt: "Cow eating fresh green fodder from a feeding trough",
   },
 ];
 
@@ -71,7 +71,7 @@ export default function HomePage() {
       <section className="relative isolate overflow-hidden bg-forest-950">
         <Image
           src="/dpr/about-barn.jpg"
-          alt="Dairy cows inside a livestock barn"
+          alt="Cows grazing on a green pasture with trees in the background"
           fill
           priority
           sizes="100vw"
@@ -85,6 +85,24 @@ export default function HomePage() {
           className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-forest-950/90 to-transparent"
           aria-hidden="true"
         />
+
+        {/* Promotional lead banner — keeps the original hero photograph in place
+            and only layers the supplied feed-pellets ad on top, as originally attached. */}
+        <div
+          className="absolute bottom-16 left-4 right-4 max-w-3xl mx-auto"
+          aria-label="Promotional banner: cattle and buffalo feed pellets"
+        >
+          <Image
+            src="/ads/feed-pellets-ad.png"
+            alt="स्वस्थ पशु समृद्ध किसान — उत्तम गुणवत्ता पशु आहार पैलेट, Cattle & Buffalo Feed Pellets"
+            width={1536}
+            height={1024}
+            className="w-full h-auto"
+            priority
+            sizes="(min-width: 1024px) 75vw, 100vw"
+            style={{ objectFit: "contain" }}
+          />
+        </div>
 
         <div className="relative mx-auto flex min-h-[86vh] max-w-7xl flex-col justify-center px-4 py-24 sm:px-6 sm:py-28 lg:px-8">
           <p className="reveal text-[11px] font-semibold uppercase tracking-[0.3em] text-lime-400">
@@ -170,7 +188,7 @@ export default function HomePage() {
           <div className="reveal relative aspect-[5/4] overflow-hidden rounded-2xl shadow-[var(--shadow-lift)]">
             <Image
               src="/dpr/about-farmer.jpg"
-              alt="Farmer tending cattle in a livestock shed"
+              alt="Buffalo herd grazing on a green pasture with a herder"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"
