@@ -31,6 +31,22 @@ export const productCategories: ProductCategory[] = [
     productType: "पशु आहार",
   },
   {
+    slug: "safed-sona",
+    name: "सफ़ेद सोना पशु आहार",
+    description:
+      "Organic Quality Animal Feed — Made Without Urea. सुप्रीम+ पौष्टिक एवं भरोसेमंद पशु आहार — संतुलित अनाज, विटामिन एवं मिनरल्स के साथ।",
+    image: "/products/safed-sona.jpg",
+    alt: "सफ़ेद सोना पशु आहार पैकेजिंग",
+    productType: "पशु आहार",
+    details: [
+      { label: "Brand Line", value: "Organic Quality Animal Feed — Made Without Urea" },
+      { label: "Variant", value: "सुप्रीम + (Supreme+), GMP" },
+      { label: "Feed Type", value: "पौष्टिक एवं भरोसेमंद पशु आहार (गोल्ड)" },
+      { label: "Highlights", value: "Balanced Grains · Vitamins & Minerals" },
+      { label: "Net Weight", value: "50 किलो नेट" },
+    ],
+  },
+  {
     slug: "dhana-dhan",
     name: "ढना-ढन Organic Feed & Fat Booster",
     description: "पशुओं की सम्पूर्ण सुरक्षा आयुर्वेद का आधार। ऑर्गेनिक फ़ीड एवं फैट बूस्टर।",
