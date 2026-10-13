@@ -170,7 +170,7 @@ export default function HomePage() {
           <div className="reveal relative aspect-[5/4] overflow-hidden rounded-2xl shadow-[var(--shadow-lift)]">
             <Image
               src="/dpr/about-farmer.jpg"
-              alt="Buffalo herd grazing on a green pasture with a herder"
+              alt="Indian cows grazing on a green pasture with a herder"
               fill
               sizes="(min-width: 1024px) 45vw, 100vw"
               className="object-cover"

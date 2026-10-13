@@ -64,7 +64,7 @@ export default function AboutPage() {
           <div className="reveal relative aspect-[4/3] overflow-hidden rounded-2xl shadow-[var(--shadow-lift)]">
             <Image
               src="/dpr/about-farmer.jpg"
-              alt="Farmer tending to cattle in a livestock shed"
+              alt="Indian cows grazing on a green pasture with a herder"
               fill
               priority
               sizes="(min-width: 1024px) 45vw, 100vw"
